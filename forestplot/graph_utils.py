@@ -83,19 +83,21 @@ def draw_est_markers(
     -------
             Matplotlib Axes object.
     """
-    marker = kwargs.get("marker", "s")
+    markers = kwargs.get("marker", "s")
+    if type(marker) == str:  # i.e. we passed just a standard marker for all
+        markers = [markers]
     markersize = kwargs.get("markersize", 40)
     markercolor = kwargs.get("markercolor", "darkslategray")
     markeralpha = kwargs.get("markeralpha", 0.8)
-    ax.scatter(
-        y=yticklabel,
-        x=estimate,
-        data=dataframe,
-        marker=marker,
-        s=markersize,
-        color=markercolor,
-        alpha=markeralpha,
-    )
+    for i, row in dataframe.iterrows():
+        ax.scatter(
+            y=row[yticklabel],
+            x=row[estimate],
+            marker=markers[i % len(markers)],  # Cycle through markers if fewer than rows
+            s=markersize,
+            color=markercolor,
+            alpha=markeralpha
+        )
     return ax
 
 
