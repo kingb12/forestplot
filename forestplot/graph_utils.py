@@ -84,7 +84,7 @@ def draw_est_markers(
             Matplotlib Axes object.
     """
     markers = kwargs.get("marker", "s")
-    if type(marker) == str:  # i.e. we passed just a standard marker for all
+    if type(markers) == str:  # i.e. we passed just a standard marker for all
         markers = [markers]
     markersize = kwargs.get("markersize", 40)
     markercolor = kwargs.get("markercolor", "darkslategray")
